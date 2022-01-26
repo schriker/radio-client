@@ -1,4 +1,12 @@
+import useStore from '../../store/store';
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
+
+dayjs.extend(duration);
+
 function Timeline() {
+  const song = useStore((state) => state.songs[0]);
+
   return (
     <div className="space-y-2">
       <div className="bg-zinc-700 rounded-full overflow-hidden">
@@ -12,8 +20,10 @@ function Timeline() {
         ></div>
       </div>
       <div className="flex justify-between text-sm leading-6 font-medium tabular-nums">
-        <div className="text-zinc-100">24:16</div>
-        <div className="text-zinc-400">75:50</div>
+        <div className="text-zinc-100">00:00</div>
+        <div className="text-zinc-400">
+          {dayjs.duration(song.lengthSeconds, 'seconds').format('mm:ss')}
+        </div>
       </div>
     </div>
   );
