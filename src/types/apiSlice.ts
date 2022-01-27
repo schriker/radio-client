@@ -21,10 +21,10 @@ export interface Song {
   endTime: string;
 }
 
-export type ApiState = {
+export interface ApiState {
   songs: Song[];
   fetchSongs: () => void;
   removeAllSubscriptions: () => void;
   pushSong: (song: Song) => void;
   removeSong: (id: number) => void;
-};
+}

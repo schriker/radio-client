@@ -2,6 +2,7 @@ import Controls from '../Controls/Controls';
 import Playlist from '../Playlist/Playlist';
 import Song from '../Song/Song';
 import Timeline from '../Timeline/Timeline';
+import Youtube from '../Youtube/Youtube';
 
 function Player() {
   return (
@@ -10,6 +11,7 @@ function Player() {
         <Song />
         <Timeline />
       </div>
+      <Youtube />
       <Playlist />
       <Controls />
     </>

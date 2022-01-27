@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import PlaylistItem from '../PlaylistItem/PlaylistItem';
 import { Scrollbars } from 'react-custom-scrollbars';
 import useStore from '../../store/store';

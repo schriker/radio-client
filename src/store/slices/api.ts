@@ -1,7 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 import { GetState, SetState } from 'zustand';
 import dayjs from 'dayjs';
-import { ApiState, Song } from '../../types/apiSlice';
+import { Song } from '../../types/apiSlice';
+import { StoreState } from '../../types/store';
 
 const supabase = createClient(
   process.env.REACT_APP_DB_URL as string,
@@ -9,15 +10,17 @@ const supabase = createClient(
 );
 
 export const createApiSlice = (
-  set: SetState<ApiState>,
-  get: GetState<ApiState>
+  set: SetState<StoreState>,
+  get: GetState<StoreState>
 ) => ({
   songs: [],
   fetchSongs: async () => {
     const songsResponse = await supabase
       .from<Song>('songs')
       .select('*')
-      .gt('endTime', dayjs().toISOString());
+      .gt('endTime', dayjs().toISOString())
+      .order('id', { ascending: true });
+      
     if (songsResponse.error) {
       console.log(songsResponse);
       return;
