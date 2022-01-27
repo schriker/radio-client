@@ -1,4 +1,3 @@
-import Controls from '../Controls/Controls';
 import Playlist from '../Playlist/Playlist';
 import Song from '../Song/Song';
 import Timeline from '../Timeline/Timeline';
@@ -13,7 +12,6 @@ function Player() {
       </div>
       <Youtube />
       <Playlist />
-      <Controls />
     </>
   );
 }

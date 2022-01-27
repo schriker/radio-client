@@ -1,6 +1,6 @@
 function Placeholder() {
   return (
-    <div className="p-8">
+    <div className="p-8 h-full">
       <div className="animate-pulse flex space-x-4">
         <div className="rounded-full bg-zinc-700 h-10 w-10"></div>
         <div className="flex-1 space-y-6 py-1">

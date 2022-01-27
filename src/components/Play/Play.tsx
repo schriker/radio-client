@@ -17,7 +17,7 @@ function Play() {
     <button
       type="button"
       aria-label="Play"
-      className="bg-zinc-100 -mt-10 mb-2 w-20 h-20 rounded-full drop-shadow-md flex justify-center items-center"
+      className="bg-zinc-100 -mt-10 mb-2 w-20 h-20 rounded-full drop-shadow-md flex justify-center items-center hover:bg-zinc-200 hover:drop-shadow-none"
       onClick={handleClick}
     >
       {isPlaying ? <PauseIcon /> : <PlayIcon />}

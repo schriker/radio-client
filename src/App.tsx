@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import Controls from './components/Controls/Controls';
 import Placeholder from './components/Placeholder/Placeholder';
 import Player from './components/Player/Player';
 import useStore from './store/store';
@@ -21,6 +22,7 @@ function App() {
     <div className="container mx-auto max-w-5xl lg:py-14 h-screen">
       <div className="bg-zinc-800 lg:rounded-xl flex flex-col h-full">
         {!!songs.length ? <Player /> : <Placeholder />}
+        <Controls />
       </div>
     </div>
   );
