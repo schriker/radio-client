@@ -6,7 +6,7 @@ function Song() {
   return (
     <div className="flex items-center space-x-4 mb-8">
       <div
-        className="flex-none rounded-lg bg-zinc-900 w-24 h-24 bg-cover"
+        className="flex-none rounded-lg bg-zinc-900 w-24 h-24 bg-cover positio bg-center"
         style={{
           backgroundImage: `url(${song.thumbnail.thumbnails[2].url})`,
         }}

@@ -30,6 +30,10 @@ function Youtube() {
   }, [isPlaying, song, fetchSongs, removeAllSubscriptions]);
 
   const onPlayerReady = () => {
+    const time = dayjs().diff(song.startTime, 'second');
+    if (time < song.lengthSeconds) {
+      ref.current?.seekTo(time);
+    }
     setPlayerReady(true);
   };
 
