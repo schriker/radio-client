@@ -19,7 +19,10 @@ function App() {
   }, [fetchSongs, removeAllSubscriptions]);
 
   return (
-    <div className="container mx-auto max-w-5xl lg:py-14 h-screen">
+    <div
+      className="container mx-auto max-w-5xl lg:py-14 fixed top-0 bottom-0 sm:relative sm:h-screen"
+      id="body-content"
+    >
       <div className="bg-zinc-800 lg:rounded-xl flex flex-col h-full">
         {!!songs.length ? <Player /> : <Placeholder />}
         <Controls />

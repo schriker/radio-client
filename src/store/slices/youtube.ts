@@ -8,9 +8,11 @@ export const createYoutubeSlice = (
   isPlaying: false,
   isPlayerReady: false,
   playerPosition: 0,
+  volume: 1,
   setPlayerPosition: (position: number) => set({ playerPosition: position }),
   setPlayerReady: (ready: boolean) => set({ isPlayerReady: ready }),
   togglePlayer: (state: boolean) => {
     set({ isPlaying: state });
   },
+  setVolume: (value: number) => set({ volume: value }),
 });

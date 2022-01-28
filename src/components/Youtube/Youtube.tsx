@@ -15,6 +15,7 @@ function Youtube() {
     (state) => state.removeAllSubscriptions
   );
   const fetchSongs = useStore((state) => state.fetchSongs);
+  const volume = useStore((state) => state.volume);
   const ref = useRef<ReactPlayer | null>(null);
 
   useEffect(() => {
@@ -57,7 +58,7 @@ function Youtube() {
     <div className="hidden">
       <ReactPlayer
         ref={ref}
-        volume={1}
+        volume={volume}
         playing={isPlaying}
         onPause={onPause}
         onPlay={onPlay}

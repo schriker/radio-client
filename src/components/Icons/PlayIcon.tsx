@@ -1,7 +1,7 @@
 function PlayIcon() {
   return (
     <svg
-      className="fill-zinc-800"
+      className="fill-zinc-700"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       width="24"

@@ -5,3 +5,7 @@
 body {
   background-color: theme('colors.zinc.900');
 }
+
+.h-2-0 {
+  background-color: theme('colors.purple.600');
+}
