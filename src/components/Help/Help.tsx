@@ -7,14 +7,11 @@ function Help() {
   return (
     <div onClick={() => setIsOpen(true)} className="ml-auto relative group">
       <HelpModal isOpen={isOpen} setIsOpen={setIsOpen} />
-      <span className="text-zinc-100 hidden sm:inline-block mr-2 group-hover:underline cursor-pointer">
-        Dodaj utwór
-      </span>
       <button
         type="button"
-        className="rounded-full w-7 h-7 bg-zinc-500 text-zinc-100 font-semibold text-xs mr-0 group-hover:bg-zinc-700"
+        className="rounded-md px-2 h-7 bg-zinc-500 text-zinc-100 font-semibold text-xs mr-0 group-hover:bg-zinc-700"
       >
-        ?
+        Dodaj utwór
       </button>
     </div>
   );
