@@ -18,6 +18,7 @@ export function Volume() {
       <div className="w-24">
         <div className="h-2">
           <ReactSlider
+            className="w-24"
             value={volume * 100}
             onChange={handleChange}
             renderThumb={(props, state) => (
