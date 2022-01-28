@@ -20,7 +20,10 @@ function PlaylistItem({ song }: PlaylistItemPropsType) {
       <div className="flex space-x-4 items-center">
         <p className="text-purple-400 text-xs">{song.user}</p>
         <p className="text-zinc-400 text-xs">&middot;</p>
-        <p className="text-zinc-400 text-xs">
+        <p
+          className="text-zinc-400 text-xs"
+          title={dayjs(song.startTime).format('DD.MM.YYYY - HH:mm:ss')}
+        >
           {dayjs.duration(song.lengthSeconds, 'seconds').format('mm:ss')}
         </p>
       </div>

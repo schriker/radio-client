@@ -20,7 +20,7 @@ export const createApiSlice = (
       .select('*')
       .gt('endTime', dayjs().toISOString())
       .order('id', { ascending: true });
-      
+
     if (songsResponse.error) {
       console.log(songsResponse);
       return;
@@ -35,7 +35,8 @@ export const createApiSlice = (
             get().pushSong(payload.new);
             break;
           case 'DELETE':
-            get().removeSong(payload.old.id);
+            get().removeAllSubscriptions();
+            get().fetchSongs();
             break;
           default:
             return;
