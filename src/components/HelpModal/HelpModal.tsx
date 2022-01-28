@@ -69,7 +69,15 @@ function HelpModal({ isOpen, setIsOpen }: ModalPropsType) {
                   pominięty jeśli odpowiednia liczba użytkowników zagłosuje.
                 </p>
               </div>
-
+              <div className="w-full h-56 mt-4 rounded-md overflow-hidden">
+                <iframe
+                  title="bot"
+                  src="https://poorchat.net/users/RadioPancernik"
+                  frameBorder="0"
+                  width="100%"
+                  height="100%"
+                />
+              </div>
               <div className="mt-4">
                 <button
                   type="button"
