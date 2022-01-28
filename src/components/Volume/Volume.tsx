@@ -1,13 +1,13 @@
-import ReactSlider from 'react-slider';
 import VolumeIcon from '../Icons/VolumeIcon';
 import useStore from '../../store/store';
+import { getTrackBackground, Range } from 'react-range';
 
 export function Volume() {
   const volume = useStore((state) => state.volume);
   const setVolume = useStore((state) => state.setVolume);
 
-  const handleChange = (value: number) => {
-    setVolume(value / 100);
+  const handleChange = (values: number[]) => {
+    setVolume(values[0] / 100);
   };
 
   return (
@@ -17,20 +17,44 @@ export function Volume() {
       </div>
       <div className="w-24">
         <div className="h-2">
-          <ReactSlider
-            className="w-24"
-            value={volume * 100}
+          <Range
+            step={0.1}
+            min={0}
+            max={100}
+            values={[volume * 100]}
             onChange={handleChange}
-            // renderThumb={(props, state) => (
-            //   <div
-            //     {...props}
-            //     className="w-4 h-4 -mt-1 flex items-center justify-center bg-white rounded-full shadow hover:cursor-pointer focus:outline-none focus:ring-violet-600 focus:ring-2"
-            //   >
-            //     <div className="w-1.5 h-1.5 bg-purple-600 rounded-full"></div>
-            //   </div>
-            // )}
-            renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
-            trackClassName="bg-zinc-700 rounded-full h-2"
+            renderTrack={({ props, children }) => (
+              <div
+                {...props}
+                style={{
+                  ...props.style,
+                  width: '100%',
+                  background: getTrackBackground({
+                    values: [volume * 100],
+                    colors: [
+                      'rgb(147 51 234 / var(--tw-bg-opacity))',
+                      'rgb(63 63 70 / var(--tw-bg-opacity))',
+                    ],
+                    min: 0,
+                    max: 100,
+                  }),
+                }}
+                className="rounded-full h-2"
+              >
+                {children}
+              </div>
+            )}
+            renderThumb={({ props }) => (
+              <div
+                {...props}
+                style={{
+                  ...props.style,
+                }}
+                className="w-4 h-4 flex items-center justify-center bg-white rounded-full shadow hover:cursor-pointer focus:outline-none focus:ring-violet-600 focus:ring-2"
+              >
+                <div className="w-1.5 h-1.5 bg-purple-600 rounded-full"></div>
+              </div>
+            )}
           />
         </div>
       </div>
