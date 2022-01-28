@@ -9,7 +9,7 @@ function Help() {
       <HelpModal isOpen={isOpen} setIsOpen={setIsOpen} />
       <span
         onClick={() => setIsOpen(true)}
-        className="text-zinc-100 hidden sm:inline-block mr-2 hover:underline"
+        className="text-zinc-100 hidden sm:inline-block mr-2 hover:underline cursor-pointer"
       >
         Dodaj utwór
       </span>
