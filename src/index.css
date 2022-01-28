@@ -4,6 +4,7 @@
 
 body {
   background-color: theme('colors.zinc.900');
+  overflow: hidden;
 }
 
 .h-2-0 {
