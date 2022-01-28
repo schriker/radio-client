@@ -15,8 +15,8 @@ export function Volume() {
       <div>
         <VolumeIcon />
       </div>
-      <div>
-        <div className="w-24 h-2">
+      <div className="w-24">
+        <div className="h-2">
           <ReactSlider
             value={volume * 100}
             onChange={handleChange}
