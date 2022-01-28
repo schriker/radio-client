@@ -1,19 +1,29 @@
 import VolumeIcon from '../Icons/VolumeIcon';
 import useStore from '../../store/store';
 import { getTrackBackground, Range } from 'react-range';
+import MuteIcon from '../Icons/MuteIcon';
 
 export function Volume() {
   const volume = useStore((state) => state.volume);
+  const muted = useStore((state) => state.muted);
+  const setMuted = useStore((state) => state.setMuted);
   const setVolume = useStore((state) => state.setVolume);
 
   const handleChange = (values: number[]) => {
+    setMuted(false);
     setVolume(values[0] / 100);
+  };
+
+  const mute = () => {
+    setMuted(!muted);
   };
 
   return (
     <div className="flex items-center space-x-3">
-      <div>
-        <VolumeIcon />
+      <div className="flex w-6 mr-1">
+        <button onClick={mute}>
+          {muted || volume === 0 ? <MuteIcon /> : <VolumeIcon />}
+        </button>
       </div>
       <div className="w-24">
         <div className="h-2">
@@ -21,7 +31,7 @@ export function Volume() {
             step={1}
             min={0}
             max={100}
-            values={[volume * 100]}
+            values={muted ? [0] : [volume * 100]}
             onChange={handleChange}
             renderTrack={({ props, children }) => (
               <div
@@ -30,7 +40,7 @@ export function Volume() {
                   ...props.style,
                   width: '100%',
                   background: getTrackBackground({
-                    values: [volume * 100],
+                    values: muted ? [0] : [volume * 100],
                     colors: [
                       'rgb(147 51 234 / var(--tw-bg-opacity))',
                       'rgb(63 63 70 / var(--tw-bg-opacity))',

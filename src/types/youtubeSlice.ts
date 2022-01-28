@@ -3,6 +3,8 @@ export interface YoutubeState {
   isPlayerReady: boolean;
   playerPosition: number;
   volume: number;
+  muted: boolean;
+  setMuted: (value: boolean) => void;
   setVolume: (value: number) => void;
   setPlayerPosition: (position: number) => void;
   setPlayerReady: (ready: boolean) => void;

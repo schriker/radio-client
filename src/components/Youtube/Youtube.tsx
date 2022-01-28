@@ -11,6 +11,7 @@ function Youtube() {
   const togglePlayer = useStore((state) => state.togglePlayer);
   const isPlaying = useStore((state) => state.isPlaying);
   const setPlayerPosition = useStore((state) => state.setPlayerPosition);
+  const muted = useStore((state) => state.muted);
   const removeAllSubscriptions = useStore(
     (state) => state.removeAllSubscriptions
   );
@@ -58,7 +59,7 @@ function Youtube() {
     <div className="hidden">
       <ReactPlayer
         ref={ref}
-        volume={volume}
+        volume={muted ? 0 : volume}
         playing={isPlaying}
         onPause={onPause}
         onPlay={onPlay}
