@@ -13,7 +13,34 @@ export const createApiSlice = (
   set: SetState<StoreState>,
   get: GetState<StoreState>
 ) => ({
+  loading: false,
+  hasMore: true,
   songs: [],
+  history: [],
+  fetchHistory: async (time?: string) => {
+    set({ loading: true });
+    const history = await supabase
+      .from<Song>('songs')
+      .select('*')
+      .lt('endTime', time ? time : dayjs().toISOString())
+      .limit(100)
+      .order('id', { ascending: false });
+    set({ loading: false });
+    if (history.error) {
+      console.log(history);
+      return;
+    }
+
+    if (history.data.length < 100) {
+      set({ hasMore: false });
+    }
+
+    if (time) {
+      set((state) => ({ history: [...state.history, ...history.data] }));
+    } else {
+      set({ history: history.data });
+    }
+  },
   fetchSongs: async () => {
     const songsResponse = await supabase
       .from<Song>('songs')
@@ -50,4 +77,5 @@ export const createApiSlice = (
     set((state) => ({
       songs: state.songs.filter((song) => song.id !== id),
     })),
+  resetHasMore: () => set({ hasMore: true }),
 });

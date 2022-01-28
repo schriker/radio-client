@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
 import { PlaylistHistoryPropsType } from '../../types/playlistHistory';
+import PlaylistHistoryList from '../PlaylistHistoryList/PlaylistHistoryList';
 
 function PlaylistHistory({ setIsOpen, isOpen }: PlaylistHistoryPropsType) {
   const onClose = () => {
@@ -37,7 +38,7 @@ function PlaylistHistory({ setIsOpen, isOpen }: PlaylistHistoryPropsType) {
               leaveFrom="translate-x-0"
               leaveTo="translate-x-full"
             >
-              <div className="relative w-screen max-w-md">
+              <div className="relative w-screen max-w-3xl">
                 <Transition.Child
                   as={Fragment}
                   enter="ease-in-out duration-200"
@@ -61,15 +62,11 @@ function PlaylistHistory({ setIsOpen, isOpen }: PlaylistHistoryPropsType) {
                 <div className="h-full flex flex-col py-6 bg-zinc-800 shadow-xl overflow-y-auto">
                   <div className="px-4 sm:px-6">
                     <Dialog.Title className="text-lg font-medium text-zinc-100">
-                      Historia
+                      Historia odtwarzania
                     </Dialog.Title>
                   </div>
-                  <div className="mt-6 relative flex-1 px-4 sm:px-6">
-                    {/* Replace with your content */}
-                    <div className="absolute inset-0 px-4 sm:px-6">
-                      <div className="h-full" aria-hidden="true" />
-                    </div>
-                    {/* /End replace */}
+                  <div className="mt-6 relative flex-1">
+                    <PlaylistHistoryList />
                   </div>
                 </div>
               </div>

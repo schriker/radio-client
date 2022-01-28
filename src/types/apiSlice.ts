@@ -22,9 +22,14 @@ export interface Song {
 }
 
 export interface ApiState {
+  loading: boolean;
+  hasMore: boolean;
   songs: Song[];
+  history: Song[];
+  fetchHistory: (time?: string) => void;
   fetchSongs: () => void;
   removeAllSubscriptions: () => void;
   pushSong: (song: Song) => void;
   removeSong: (id: number) => void;
+  resetHasMore: () => void;
 }

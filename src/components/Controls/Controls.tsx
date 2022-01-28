@@ -10,7 +10,7 @@ function Controls() {
       <Play />
       <div className="flex items-center space-x-2">
         <Help />
-        {/* <Sidebar /> */}
+        <Sidebar />
       </div>
     </div>
   );
