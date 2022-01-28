@@ -21,14 +21,15 @@ export function Volume() {
             className="w-24"
             value={volume * 100}
             onChange={handleChange}
-            renderThumb={(props, state) => (
-              <div
-                {...props}
-                className="w-4 h-4 -mt-1 flex items-center justify-center bg-white rounded-full shadow hover:cursor-pointer focus:outline-none focus:ring-violet-600 focus:ring-2"
-              >
-                <div className="w-1.5 h-1.5 bg-purple-600 rounded-full"></div>
-              </div>
-            )}
+            // renderThumb={(props, state) => (
+            //   <div
+            //     {...props}
+            //     className="w-4 h-4 -mt-1 flex items-center justify-center bg-white rounded-full shadow hover:cursor-pointer focus:outline-none focus:ring-violet-600 focus:ring-2"
+            //   >
+            //     <div className="w-1.5 h-1.5 bg-purple-600 rounded-full"></div>
+            //   </div>
+            // )}
+            renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
             trackClassName="bg-zinc-700 rounded-full h-2"
           />
         </div>
