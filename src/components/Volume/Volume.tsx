@@ -18,7 +18,7 @@ export function Volume() {
       <div className="w-24">
         <div className="h-2">
           <Range
-            step={0.1}
+            step={1}
             min={0}
             max={100}
             values={[volume * 100]}
