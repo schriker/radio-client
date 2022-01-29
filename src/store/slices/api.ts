@@ -91,7 +91,7 @@ export const createApiSlice = (
   subscribeNotifications: async () => {
     supabase
       .from<Notification>('notifications')
-      .on('*', (payload) => {
+      .on('INSERT', (payload) => {
         switch (payload.eventType) {
           case 'INSERT':
             set((state) => ({

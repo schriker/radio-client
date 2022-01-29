@@ -24,8 +24,8 @@ function NotificationsItem({ notifification }: NotificationsItemPropsType) {
       leaveFrom="opacity-100 scale-100"
       leaveTo="opacity-0 scale-95"
     >
-      <div className="bg-zinc-800 mb-2 rounded-lg text-zinc-400 py-4 px-4 shadow-xl flex items-center max-w-sm text-sm">
-        <InformationCircleIcon className="w-5 h-5 text-purple-500 mr-2 flex-shrink-0" />
+      <div className="bg-zinc-600 mb-2 rounded-lg text-zinc-100 py-4 px-4 shadow-xl flex items-center max-w-sm text-sm">
+        <InformationCircleIcon className="w-5 h-5 text-purple-400 mr-2 flex-shrink-0" />
         {notifification.text}
       </div>
     </Transition>
