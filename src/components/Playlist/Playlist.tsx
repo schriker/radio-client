@@ -7,7 +7,7 @@ function Playlist() {
   const [_, ...songs] = useStore((state) => state.songs);
 
   return (
-    <Scrollbars>
+    <Scrollbars style={{ minHeight: '70px' }}>
       {songs.map((song) => (
         <PlaylistItem key={song.videoId} song={song} />
       ))}
