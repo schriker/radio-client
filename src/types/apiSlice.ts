@@ -4,6 +4,11 @@ export interface Thumbnail {
   height: number;
 }
 
+export interface Notification {
+  id: number;
+  text: string;
+}
+
 export interface Song {
   id: number;
   author: string;
@@ -26,10 +31,12 @@ export interface ApiState {
   hasMore: boolean;
   songs: Song[];
   history: Song[];
+  notifications: Notification[];
   fetchHistory: (time?: string) => void;
   fetchSongs: () => void;
   removeAllSubscriptions: () => void;
   pushSong: (song: Song) => void;
   removeSong: (id: number) => void;
   resetHasMore: () => void;
+  subscribeNotifications: () => void;
 }

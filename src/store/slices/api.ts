@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { GetState, SetState } from 'zustand';
 import dayjs from 'dayjs';
-import { Song } from '../../types/apiSlice';
+import { Song, Notification } from '../../types/apiSlice';
 import { StoreState } from '../../types/store';
 
 const supabase = createClient(
@@ -15,6 +15,7 @@ export const createApiSlice = (
 ) => ({
   loading: false,
   hasMore: true,
+  notifications: [],
   songs: [],
   history: [],
   fetchHistory: async (time?: string) => {
@@ -60,6 +61,15 @@ export const createApiSlice = (
         switch (payload.eventType) {
           case 'INSERT':
             get().pushSong(payload.new);
+            set((state) => ({
+              notifications: [
+                ...state.notifications,
+                {
+                  id: payload.new.id,
+                  text: `${payload.new.user} - "${payload.new.author} - ${payload.new.title}"`,
+                },
+              ],
+            }));
             break;
           case 'DELETE':
             get().removeAllSubscriptions();
@@ -78,4 +88,20 @@ export const createApiSlice = (
       songs: state.songs.filter((song) => song.id !== id),
     })),
   resetHasMore: () => set({ hasMore: true }),
+  subscribeNotifications: async () => {
+    supabase
+      .from<Notification>('notifications')
+      .on('*', (payload) => {
+        switch (payload.eventType) {
+          case 'INSERT':
+            set((state) => ({
+              notifications: [...state.notifications, payload.new],
+            }));
+            break;
+          default:
+            return;
+        }
+      })
+      .subscribe();
+  },
 });

@@ -29,6 +29,7 @@ function Youtube() {
         ref.current?.seekTo(time);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPlaying]);
 
   const onPlayerReady = () => {
