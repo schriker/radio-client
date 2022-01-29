@@ -29,7 +29,7 @@ function Youtube() {
         ref.current?.seekTo(time);
       }
     }
-  }, [isPlaying, song, fetchSongs, removeAllSubscriptions]);
+  }, [isPlaying]);
 
   const onPlayerReady = () => {
     const time = dayjs().diff(song.startTime, 'second');
