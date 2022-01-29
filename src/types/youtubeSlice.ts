@@ -9,4 +9,5 @@ export interface YoutubeState {
   setPlayerPosition: (position: number) => void;
   setPlayerReady: (ready: boolean) => void;
   togglePlayer: (state: boolean) => void;
+  initVolume: () => void;
 }

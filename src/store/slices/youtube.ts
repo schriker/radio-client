@@ -16,5 +16,15 @@ export const createYoutubeSlice = (
   togglePlayer: (state: boolean) => {
     set({ isPlaying: state });
   },
-  setVolume: (value: number) => set({ volume: value }),
+  initVolume: () => {
+    const userSavedVolume = localStorage.getItem('volume');
+
+    if (userSavedVolume) {
+      set({ volume: JSON.parse(userSavedVolume).volume });
+    }
+  },
+  setVolume: (value: number) => {
+    set({ volume: value });
+    localStorage.setItem('volume', JSON.stringify({ volume: value }));
+  },
 });

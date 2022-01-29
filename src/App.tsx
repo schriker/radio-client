@@ -6,17 +6,18 @@ import useStore from './store/store';
 
 function App() {
   const fetchSongs = useStore((state) => state.fetchSongs);
+  const initVolume = useStore((state) => state.initVolume);
   const songs = useStore((state) => state.songs);
   const removeAllSubscriptions = useStore(
     (state) => state.removeAllSubscriptions
   );
   useEffect(() => {
     fetchSongs();
-
+    initVolume();
     return () => {
       removeAllSubscriptions();
     };
-  }, [fetchSongs, removeAllSubscriptions]);
+  }, [fetchSongs, removeAllSubscriptions, initVolume]);
 
   return (
     <div
