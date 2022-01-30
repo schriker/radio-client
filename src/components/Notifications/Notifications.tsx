@@ -5,7 +5,7 @@ function Notifications() {
   const notifications = useStore((state) => state.notifications);
 
   return (
-    <div className="fixed sm:right-4 top-5 z-20">
+    <div className="absolute md:fixed top-5 right-4 left-4 md:left-auto z-20">
       {notifications.map((item) => (
         <NotificationsItem notifification={item} key={item.id} />
       ))}

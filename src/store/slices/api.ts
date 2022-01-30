@@ -74,6 +74,8 @@ export const createApiSlice = (
           case 'DELETE':
             get().removeAllSubscriptions();
             get().fetchSongs();
+            get().subscribeNotifications();
+            set({ notifications: [] });
             break;
           default:
             return;
