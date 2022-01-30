@@ -9,19 +9,16 @@ function App() {
   const fetchSongs = useStore((state) => state.fetchSongs);
   const initVolume = useStore((state) => state.initVolume);
   const songs = useStore((state) => state.songs);
-  const removeAllSubscriptions = useStore(
-    (state) => state.removeAllSubscriptions
-  );
   const subscribeNotifications = useStore(
     (state) => state.subscribeNotifications
   );
+  const subscribeSongs = useStore((state) => state.subscribeSongs);
+
   useEffect(() => {
     fetchSongs();
     initVolume();
     subscribeNotifications();
-    return () => {
-      removeAllSubscriptions();
-    };
+    subscribeSongs();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

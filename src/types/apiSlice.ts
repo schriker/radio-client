@@ -39,4 +39,5 @@ export interface ApiState {
   removeSong: (id: number) => void;
   resetHasMore: () => void;
   subscribeNotifications: () => void;
+  subscribeSongs: () => void;
 }

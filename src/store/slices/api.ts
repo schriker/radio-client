@@ -54,7 +54,15 @@ export const createApiSlice = (
       return;
     }
     set({ songs: songsResponse.data });
-
+  },
+  removeAllSubscriptions: () => supabase.removeAllSubscriptions(),
+  pushSong: (song: Song) => set((state) => ({ songs: [...state.songs, song] })),
+  removeSong: (id: number) =>
+    set((state) => ({
+      songs: state.songs.filter((song) => song.id !== id),
+    })),
+  resetHasMore: () => set({ hasMore: true }),
+  subscribeSongs: async () => {
     supabase
       .from<Song>('songs')
       .on('*', (payload) => {
@@ -70,12 +78,12 @@ export const createApiSlice = (
                 },
               ],
             }));
+            console.log('Push', payload);
             break;
           case 'DELETE':
-            get().removeAllSubscriptions();
             get().fetchSongs();
-            get().subscribeNotifications();
             set({ notifications: [] });
+            console.log('Skip', payload);
             break;
           default:
             return;
@@ -83,13 +91,6 @@ export const createApiSlice = (
       })
       .subscribe();
   },
-  removeAllSubscriptions: () => supabase.removeAllSubscriptions(),
-  pushSong: (song: Song) => set((state) => ({ songs: [...state.songs, song] })),
-  removeSong: (id: number) =>
-    set((state) => ({
-      songs: state.songs.filter((song) => song.id !== id),
-    })),
-  resetHasMore: () => set({ hasMore: true }),
   subscribeNotifications: async () => {
     supabase
       .from<Notification>('notifications')
@@ -99,6 +100,7 @@ export const createApiSlice = (
             set((state) => ({
               notifications: [...state.notifications, payload.new],
             }));
+            console.log('Notification', payload);
             break;
           default:
             return;
