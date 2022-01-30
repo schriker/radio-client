@@ -18,7 +18,7 @@ function Play() {
       disabled={!isPlayerReady}
       type="button"
       aria-label="Play"
-      className="bg-zinc-100 ml-4 mb-2 mt-2 w-12 h-12 rounded-full drop-shadow-md flex justify-center items-center disabled:bg-zinc-300 hover:bg-zinc-200 hover:drop-shadow-none sm:w-20 sm:h-20 sm:-mt-10"
+      className="bg-zinc-100 ml-4 mb-2 mt-2 w-12 h-12 rounded-full drop-shadow-md flex justify-center items-center transform transition-transform ease-out disabled:scale-0 hover:bg-zinc-200 hover:drop-shadow-none sm:w-20 sm:h-20 sm:-mt-10"
       onClick={handleClick}
     >
       {isPlaying ? <PauseIcon /> : <PlayIcon />}
