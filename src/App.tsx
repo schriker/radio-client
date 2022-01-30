@@ -22,7 +22,8 @@ function App() {
     return () => {
       removeAllSubscriptions();
     };
-  }, [fetchSongs, removeAllSubscriptions, initVolume, subscribeNotifications]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="container mx-auto max-w-5xl lg:py-14 fixed top-0 bottom-0 sm:relative sm:h-screen overflow-auto bg-zinc-800 sm:bg-opacity-0">
