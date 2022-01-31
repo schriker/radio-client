@@ -1,5 +1,6 @@
 import { Song } from './apiSlice';
 
-export type PlayListHistoryListItemPropsType = {
+export type LikePropsType = {
   song: Song;
+  small?: boolean;
 };

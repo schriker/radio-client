@@ -1,4 +1,5 @@
 import useStore from '../../store/store';
+import Like from '../Like/Like';
 
 function Song() {
   const song = useStore((state) => state.songs[0]);
@@ -17,6 +18,9 @@ function Song() {
           {song.author}
         </h2>
         <p className="text-zinc-50 text-lg truncate">{song.title}</p>
+      </div>
+      <div>
+        <Like song={song} />
       </div>
     </div>
   );

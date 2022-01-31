@@ -1,15 +1,16 @@
 import dayjs from 'dayjs';
 import { PlayListHistoryListItemPropsType } from '../../types/playlistHistory';
+import Like from '../Like/Like';
 
 function PlaylistHistoryListItem({ song }: PlayListHistoryListItemPropsType) {
   return (
-    <a
-      target="_blank"
-      rel="noopener noreferrer"
-      href={`https://www.youtube.com/watch?v=${song.videoId}`}
-      className="group"
-    >
-      <div className="flex items-center mx-3 px-3 py-3 space-x-3 border-b border-zinc-700 group-hover:bg-zinc-700">
+    <div className="flex flex-auto items-center mx-3 px-3 py-3 space-x-3 border-b border-zinc-700 hover:bg-zinc-700 max-w-full">
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href={`https://www.youtube.com/watch?v=${song.videoId}`}
+        className="flex flex-auto items-center space-x-3 truncate"
+      >
         <div
           className="flex-none rounded-lg bg-zinc-900 w-8 h-8 bg-cover bg-center"
           style={{
@@ -29,9 +30,13 @@ function PlaylistHistoryListItem({ song }: PlayListHistoryListItemPropsType) {
           >
             {dayjs.duration(song.lengthSeconds, 'seconds').format('mm:ss')}
           </p>
+          <p className="text-zinc-400 text-xs">&middot;</p>
         </div>
+      </a>
+      <div>
+        <Like song={song} small />
       </div>
-    </a>
+    </div>
   );
 }
 

@@ -19,7 +19,7 @@ export function Volume() {
   };
 
   return (
-    <div className="flex items-center space-x-3">
+    <div className="flex items-center space-x-1">
       <div className="flex w-6 mr-1">
         <button onClick={mute}>
           {muted || volume === 0 ? <MuteIcon /> : <VolumeIcon />}

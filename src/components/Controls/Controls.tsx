@@ -1,6 +1,7 @@
 import Help from '../Help/Help';
+import Liked from '../Liked/Liked';
 import Play from '../Play/Play';
-import Sidebar from '../Sidebar/Sidebar';
+import PlaylistHistory from '../PlaylistHistory/PlaylistHistory';
 import Volume from '../Volume/Volume';
 
 function Controls() {
@@ -10,7 +11,8 @@ function Controls() {
       <Play />
       <div className="flex items-center space-x-2">
         <Help />
-        <Sidebar />
+        <Liked />
+        <PlaylistHistory />
       </div>
     </div>
   );
