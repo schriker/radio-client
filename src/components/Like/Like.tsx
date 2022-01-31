@@ -1,9 +1,12 @@
 import { HeartIcon } from '@heroicons/react/solid';
 import localforage from 'localforage';
 import { useEffect, useState } from 'react';
+import useStore from '../../store/store';
 import { LikePropsType } from '../../types/like';
 
 function Like({ song, small = false }: LikePropsType) {
+  const setUnliked = useStore((state) => state.setUnliked);
+  const unliked = useStore((state) => state.unliked);
   const [liked, setLiked] = useState(false);
 
   const handleClick = async (
@@ -16,12 +19,19 @@ function Like({ song, small = false }: LikePropsType) {
         setLiked(true);
       } else {
         await localforage.removeItem(`liked:${song.id}`);
+        setUnliked(song.id);
         setLiked(false);
       }
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (unliked === song.id) {
+      setLiked(false);
+    }
+  }, [unliked, song.id]);
 
   useEffect(() => {
     const handleLiked = async () => {

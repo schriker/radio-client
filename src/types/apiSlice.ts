@@ -30,6 +30,7 @@ export interface ApiState {
   loading: boolean;
   hasMore: boolean;
   songs: Song[];
+  unliked: number;
   history: Song[];
   notifications: Notification[];
   fetchHistory: (time?: string) => void;
@@ -40,4 +41,5 @@ export interface ApiState {
   resetHasMore: () => void;
   subscribeNotifications: () => void;
   subscribeSongs: () => void;
+  setUnliked: (id: number) => void;
 }

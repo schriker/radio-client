@@ -17,6 +17,7 @@ export const createApiSlice = (
   hasMore: true,
   notifications: [],
   songs: [],
+  unliked: 0,
   history: [],
   fetchHistory: async (time?: string) => {
     set({ loading: true });
@@ -108,4 +109,5 @@ export const createApiSlice = (
       })
       .subscribe();
   },
+  setUnliked: (id: number) => set({ unliked: id }),
 });
