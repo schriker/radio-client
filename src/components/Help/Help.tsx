@@ -1,3 +1,4 @@
+import { PlusSmIcon } from '@heroicons/react/outline';
 import { useState } from 'react';
 import HelpModal from '../HelpModal/HelpModal';
 
@@ -9,9 +10,9 @@ function Help() {
       <HelpModal isOpen={isOpen} setIsOpen={setIsOpen} />
       <button
         type="button"
-        className="rounded-md px-2 h-7 bg-zinc-500 text-zinc-100 font-semibold text-xs mr-0 group-hover:bg-zinc-700"
+        className="rounded-full w-7 h-7 bg-zinc-500 mr-0 hover:bg-zinc-700 flex items-center justify-center"
       >
-        Dodaj utwór
+        <PlusSmIcon className="text-zinc-100 w-4" />
       </button>
     </div>
   );

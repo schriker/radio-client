@@ -17,7 +17,8 @@ export const createApiSlice = (
   hasMore: true,
   notifications: [],
   songs: [],
-  unliked: 0,
+  liked: [],
+  unliked: false,
   history: [],
   fetchHistory: async (time?: string) => {
     set({ loading: true });
@@ -109,5 +110,9 @@ export const createApiSlice = (
       })
       .subscribe();
   },
-  setUnliked: (id: number) => set({ unliked: id }),
+  addLiked: (id: number) => set((state) => ({ liked: [...state.liked, id] })),
+  removeLiked: (id: number) =>
+    set((state) => ({
+      liked: state.liked.filter((likedId) => likedId !== id),
+    })),
 });

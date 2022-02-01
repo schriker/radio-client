@@ -25,7 +25,7 @@ export function Volume() {
           {muted || volume === 0 ? <MuteIcon /> : <VolumeIcon />}
         </button>
       </div>
-      <div className="w-24">
+      <div className="w-24 mr-1">
         <div className="h-2">
           <Range
             step={1}

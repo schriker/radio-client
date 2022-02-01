@@ -1,26 +1,23 @@
 import { HeartIcon } from '@heroicons/react/solid';
 import localforage from 'localforage';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import useStore from '../../store/store';
 import { LikePropsType } from '../../types/like';
 
 function Like({ song, small = false }: LikePropsType) {
-  const setUnliked = useStore((state) => state.setUnliked);
-  const unliked = useStore((state) => state.unliked);
-  const [liked, setLiked] = useState(false);
+  const liked = useStore((store) => store.liked);
+  const removeLiked = useStore((store) => store.removeLiked);
+  const addLiked = useStore((store) => store.addLiked);
 
-  const handleClick = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const handleClick = async () => {
     try {
       const songExists = await localforage.getItem(`liked:${song.id}`);
       if (!songExists) {
         await localforage.setItem(`liked:${song.id}`, song);
-        setLiked(true);
+        addLiked(song.id);
       } else {
         await localforage.removeItem(`liked:${song.id}`);
-        setUnliked(song.id);
-        setLiked(false);
+        removeLiked(song.id);
       }
     } catch (error) {
       console.log(error);
@@ -28,19 +25,13 @@ function Like({ song, small = false }: LikePropsType) {
   };
 
   useEffect(() => {
-    if (unliked === song.id) {
-      setLiked(false);
-    }
-  }, [unliked, song.id]);
-
-  useEffect(() => {
     const handleLiked = async () => {
       try {
         const songExists = await localforage.getItem(`liked:${song.id}`);
         if (!songExists) {
-          setLiked(false);
+          removeLiked(song.id);
         } else {
-          setLiked(true);
+          addLiked(song.id);
         }
       } catch (error) {
         console.log(error);
@@ -48,15 +39,17 @@ function Like({ song, small = false }: LikePropsType) {
     };
 
     handleLiked();
-  }, [song]);
+  }, [song, addLiked, removeLiked]);
 
   return (
     <button
-      onClick={(e) => handleClick(e)}
+      onClick={handleClick}
       className={`${small ? 'w-4' : 'w-6'} ${
-        liked ? 'hover:text-purple-600' : 'hover:text-purple-300'
+        liked.includes(song.id)
+          ? 'hover:text-purple-600'
+          : 'hover:text-purple-300'
       } ${
-        liked ? 'text-purple-600' : 'text-zinc-200'
+        liked.includes(song.id) ? 'text-purple-600' : 'text-zinc-200'
       } cursor-pointer transform transition-all hover:scale-150`}
     >
       <HeartIcon />

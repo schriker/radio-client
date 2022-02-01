@@ -8,7 +8,7 @@ function Liked() {
 
   return (
     <>
-      <Sidebar title="Ulubione" isOpen={isOpen} setIsOpen={setIsOpen}>
+      <Sidebar title={<>{'Ulubione'}</>} isOpen={isOpen} setIsOpen={setIsOpen}>
         <LikedList />
       </Sidebar>
       <button
