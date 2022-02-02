@@ -1,0 +1,5 @@
+subscription NewNotification {
+  newNotification {
+    ...NotificationFragment
+  }
+}

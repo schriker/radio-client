@@ -1,0 +1,14 @@
+fragment SongFragment on Song {
+  author
+  channelId
+  endTime
+  id
+  lengthSeconds
+  startTime
+  title
+  user
+  userColor
+  videoId
+  viewCount
+  createdAt
+}
