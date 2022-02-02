@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.5.8",
     "@headlessui/react": "^1.4.3",
     "@heroicons/react": "^1.0.5",
     "@supabase/supabase-js": "^1.29.4",
@@ -14,6 +15,8 @@
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "dayjs": "^1.10.7",
+    "graphql": "^16.3.0",
+    "graphql-ws": "^5.5.5",
     "localforage": "^1.10.0",
     "react": "^17.0.2",
     "react-custom-scrollbars": "^4.2.1",
