@@ -5,11 +5,10 @@ import {
 } from '../../generated/graphql';
 import NotificationsItem from '../NotificationsItem/NotificationsItem';
 import { v4 as uuidv4 } from 'uuid';
+import { Notification } from '../../types/notifications'
 
 function Notifications() {
-  const [notifications, setNotifications] = useState<
-    { text: string; id: string }[]
-  >([]);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
   const { data: notification } = useNewNotificationSubscription();
   const { data: song } = useSongAddedSubscription();
 

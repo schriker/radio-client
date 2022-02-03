@@ -1,5 +1,6 @@
 import { SongFragmentFragment } from '../../generated/graphql';
 import Like from '../Like/Like';
+import { polishPlurals } from 'polish-plurals';
 
 function Song({ song }: { song: SongFragmentFragment }) {
   return (
@@ -15,7 +16,21 @@ function Song({ song }: { song: SongFragmentFragment }) {
         <h2 className="text-zinc-400 text-sm truncate leading-6">
           {song.author}
         </h2>
-        <p className="text-zinc-50 text-lg truncate">{song.title}</p>
+        <p className="text-zinc-50 text-lg truncate flex items-center">
+          <span>{song.title}</span>
+          {song.count && song.count > 1 && (
+            <span className="text-zinc-400 text-xs">
+              <span className="mx-2">&middot;</span>
+              {song.count}{' '}
+              {polishPlurals(
+                'odtworzenie',
+                'odtworzenia',
+                'odtworzenia',
+                song.count!
+              )}
+            </span>
+          )}
+        </p>
       </div>
       <div>
         <Like song={song} />

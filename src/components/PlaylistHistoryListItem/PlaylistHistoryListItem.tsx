@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { polishPlurals } from 'polish-plurals';
 import { SongFragmentFragment } from '../../generated/graphql';
 import Like from '../Like/Like';
 
@@ -19,7 +20,21 @@ function PlaylistHistoryListItem({ song }: { song: SongFragmentFragment }) {
         ></div>
         <div className="min-w-0 flex-auto font-medium">
           <h2 className="text-zinc-400 text-xs truncate mb-1">{song.author}</h2>
-          <p className="text-zinc-50 text-xs truncate">{song.title}</p>
+          <p className="text-zinc-50 text-xs truncate flex items-center">
+            <span>{song.title}</span>
+            {song.count && song.count > 1 && (
+              <span className="text-zinc-400 text-xs">
+                <span className="mx-2">&middot;</span>
+                {song.count}{' '}
+                {polishPlurals(
+                  'odtworzenie',
+                  'odtworzenia',
+                  'odtworzenia',
+                  song.count
+                )}
+              </span>
+            )}
+          </p>
         </div>
         <div className="flex space-x-3 items-center">
           <p className="text-purple-400 text-xs">{song.user}</p>
