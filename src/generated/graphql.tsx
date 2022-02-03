@@ -37,6 +37,7 @@ export type Song = {
   __typename?: 'Song';
   author: Scalars['String'];
   channelId: Scalars['String'];
+  count?: Maybe<Scalars['Float']>;
   createdAt: Scalars['Date'];
   endTime: Scalars['Date'];
   id: Scalars['Int'];
@@ -58,19 +59,19 @@ export type Subscription = {
 
 export type NotificationFragmentFragment = { __typename?: 'NewNotificationInput', text: string };
 
-export type SongFragmentFragment = { __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: string, createdAt: any };
+export type SongFragmentFragment = { __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: string, createdAt: any, count?: number | null };
 
 export type SongsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SongsQuery = { __typename?: 'Query', songs: Array<{ __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: string, createdAt: any }> };
+export type SongsQuery = { __typename?: 'Query', songs: Array<{ __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: string, createdAt: any, count?: number | null }> };
 
 export type SongsHistoryQueryVariables = Exact<{
   endTime?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type SongsHistoryQuery = { __typename?: 'Query', songsHistory: Array<{ __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: string, createdAt: any }> };
+export type SongsHistoryQuery = { __typename?: 'Query', songsHistory: Array<{ __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: string, createdAt: any, count?: number | null }> };
 
 export type NewNotificationSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
@@ -80,12 +81,12 @@ export type NewNotificationSubscription = { __typename?: 'Subscription', newNoti
 export type SongAddedSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SongAddedSubscription = { __typename?: 'Subscription', songAdded: { __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: string, createdAt: any } };
+export type SongAddedSubscription = { __typename?: 'Subscription', songAdded: { __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: string, createdAt: any, count?: number | null } };
 
 export type SongSkippedSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SongSkippedSubscription = { __typename?: 'Subscription', songSkipped: { __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: string, createdAt: any } };
+export type SongSkippedSubscription = { __typename?: 'Subscription', songSkipped: { __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: string, createdAt: any, count?: number | null } };
 
 export const NotificationFragmentFragmentDoc = gql`
     fragment NotificationFragment on NewNotificationInput {
@@ -106,6 +107,7 @@ export const SongFragmentFragmentDoc = gql`
   videoId
   viewCount
   createdAt
+  count
 }
     `;
 export const SongsDocument = gql`

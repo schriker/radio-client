@@ -3,3 +3,8 @@ export type NotificationsItemPropsType = {
   id: string;
   onClose: (id: string) => void;
 };
+
+export interface Notification {
+  text: string;
+  id: string;
+}

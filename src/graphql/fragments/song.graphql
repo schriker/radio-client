@@ -11,4 +11,5 @@ fragment SongFragment on Song {
   videoId
   viewCount
   createdAt
+  count
 }
