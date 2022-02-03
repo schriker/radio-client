@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
-import { PlayListHistoryListItemPropsType } from '../../types/playlistHistory';
+import { SongFragmentFragment } from '../../generated/graphql';
 import Like from '../Like/Like';
 
-function PlaylistHistoryListItem({ song }: PlayListHistoryListItemPropsType) {
+function PlaylistHistoryListItem({ song }: { song: SongFragmentFragment }) {
   return (
     <div className="flex flex-auto items-center mx-3 px-3 py-3 space-x-3 border-b border-zinc-700 hover:bg-zinc-700 max-w-full">
       <a
@@ -14,7 +14,7 @@ function PlaylistHistoryListItem({ song }: PlayListHistoryListItemPropsType) {
         <div
           className="flex-none rounded-lg bg-zinc-900 w-8 h-8 bg-cover bg-center"
           style={{
-            backgroundImage: `url(${song.thumbnail.thumbnails[0].url})`,
+            backgroundImage: `url(https://i.ytimg.com/vi/${song.videoId}/mq1.jpg)`,
           }}
         ></div>
         <div className="min-w-0 flex-auto font-medium">

@@ -13,8 +13,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
-  DateTime: any;
+  /** Date custom scalar type */
+  Date: any;
 };
 
 export type NewNotificationInput = {
@@ -37,16 +37,16 @@ export type Song = {
   __typename?: 'Song';
   author: Scalars['String'];
   channelId: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  endTime: Scalars['DateTime'];
+  createdAt: Scalars['Date'];
+  endTime: Scalars['Date'];
   id: Scalars['Int'];
   lengthSeconds: Scalars['Float'];
-  startTime: Scalars['DateTime'];
+  startTime: Scalars['Date'];
   title: Scalars['String'];
   user: Scalars['String'];
   userColor: Scalars['String'];
   videoId: Scalars['String'];
-  viewCount: Scalars['Float'];
+  viewCount: Scalars['String'];
 };
 
 export type Subscription = {
@@ -58,17 +58,19 @@ export type Subscription = {
 
 export type NotificationFragmentFragment = { __typename?: 'NewNotificationInput', text: string };
 
-export type SongFragmentFragment = { __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: number, createdAt: any };
+export type SongFragmentFragment = { __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: string, createdAt: any };
 
 export type SongsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SongsQuery = { __typename?: 'Query', songs: Array<{ __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: number, createdAt: any }> };
+export type SongsQuery = { __typename?: 'Query', songs: Array<{ __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: string, createdAt: any }> };
 
-export type SongsHistoryQueryVariables = Exact<{ [key: string]: never; }>;
+export type SongsHistoryQueryVariables = Exact<{
+  endTime?: InputMaybe<Scalars['String']>;
+}>;
 
 
-export type SongsHistoryQuery = { __typename?: 'Query', songsHistory: Array<{ __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: number, createdAt: any }> };
+export type SongsHistoryQuery = { __typename?: 'Query', songsHistory: Array<{ __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: string, createdAt: any }> };
 
 export type NewNotificationSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
@@ -78,12 +80,12 @@ export type NewNotificationSubscription = { __typename?: 'Subscription', newNoti
 export type SongAddedSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SongAddedSubscription = { __typename?: 'Subscription', songAdded: { __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: number, createdAt: any } };
+export type SongAddedSubscription = { __typename?: 'Subscription', songAdded: { __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: string, createdAt: any } };
 
 export type SongSkippedSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SongSkippedSubscription = { __typename?: 'Subscription', songSkipped: { __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: number, createdAt: any } };
+export type SongSkippedSubscription = { __typename?: 'Subscription', songSkipped: { __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: string, createdAt: any } };
 
 export const NotificationFragmentFragmentDoc = gql`
     fragment NotificationFragment on NewNotificationInput {
@@ -141,8 +143,8 @@ export type SongsQueryHookResult = ReturnType<typeof useSongsQuery>;
 export type SongsLazyQueryHookResult = ReturnType<typeof useSongsLazyQuery>;
 export type SongsQueryResult = Apollo.QueryResult<SongsQuery, SongsQueryVariables>;
 export const SongsHistoryDocument = gql`
-    query SongsHistory {
-  songsHistory {
+    query SongsHistory($endTime: String) {
+  songsHistory(endTime: $endTime) {
     ...SongFragment
   }
 }
@@ -160,6 +162,7 @@ export const SongsHistoryDocument = gql`
  * @example
  * const { data, loading, error } = useSongsHistoryQuery({
  *   variables: {
+ *      endTime: // value for 'endTime'
  *   },
  * });
  */

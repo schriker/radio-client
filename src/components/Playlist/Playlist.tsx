@@ -1,12 +1,9 @@
 import PlaylistItem from '../PlaylistItem/PlaylistItem';
-import useStore from '../../store/store';
 import { FixedSizeList as List } from 'react-window';
 import CustomScrollbarsVirtualList from '../CustomScrollbars/CustomScrollbars';
+import { SongFragmentFragment } from '../../generated/graphql';
 
-function Playlist() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, ...songs] = useStore((state) => state.songs);
-
+function Playlist({ songs }: { songs: SongFragmentFragment[] }) {
   return (
     <List
       itemData={songs}

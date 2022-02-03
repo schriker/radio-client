@@ -1,16 +1,16 @@
 import dayjs from 'dayjs';
-import { PlaylistItemPropsType } from '../../types/playlist';
 import duration from 'dayjs/plugin/duration';
+import { SongFragmentFragment } from '../../generated/graphql';
 
 dayjs.extend(duration);
 
-function PlaylistItem({ song }: PlaylistItemPropsType) {
+function PlaylistItem({ song }: { song: SongFragmentFragment }) {
   return (
     <div className="flex items-center px-8 py-3 space-x-4 border-b border-zinc-700">
       <div
         className="flex-none rounded-lg bg-zinc-900 w-12 h-12 bg-cover bg-center"
         style={{
-          backgroundImage: `url(${song.thumbnail.thumbnails[0].url})`,
+          backgroundImage: `url(https://i.ytimg.com/vi/${song.videoId}/mq1.jpg)`,
         }}
       ></div>
       <div className="min-w-0 flex-auto font-medium">

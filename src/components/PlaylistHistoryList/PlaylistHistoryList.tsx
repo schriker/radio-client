@@ -1,84 +1,58 @@
-import { useEffect } from 'react';
-import Scrollbars from 'react-custom-scrollbars';
-import useStore from '../../store/store';
-// import { FixedSizeList as List } from 'react-window';
-// import CustomScrollbarsVirtualList from '../CustomScrollbars/CustomScrollbars';
+// @ts-nocheck
+import { useSongsHistoryQuery } from '../../generated/graphql';
 import Placeholder from '../Placeholder/Placeholder';
 import PlaylistHistoryListItem from '../PlaylistHistoryListItem/PlaylistHistoryListItem';
-
+import { FixedSizeList as List } from 'react-window';
+import CustomScrollbarsVirtualList from '../CustomScrollbars/CustomScrollbars';
 function PlaylistHistoryList() {
-  const fetchHistory = useStore((state) => state.fetchHistory);
-  const history = useStore((state) => state.history);
-  const loading = useStore((state) => state.loading);
-  const hasMore = useStore((state) => state.hasMore);
-  const resetHasMore = useStore((state) => state.resetHasMore);
-
-  useEffect(() => {
-    fetchHistory();
-    return () => {
-      resetHasMore();
-    };
-  }, [fetchHistory, resetHasMore]);
+  const { data, loading, error, fetchMore } = useSongsHistoryQuery({
+    fetchPolicy: 'network-only',
+  });
 
   const loadMore = () => {
-    fetchHistory(history[history.length - 1].endTime);
+    fetchMore({
+      variables: {
+        endTime: data?.songsHistory[data?.songsHistory.length - 1].endTime,
+      },
+    });
   };
 
-  // return !!history.length ? (
-  //   <>
-  //     <List
-  //       itemData={history}
-  //       itemCount={history.length}
-  //       itemSize={61}
-  //       height={300}
-  //       width="100%"
-  //       outerElementType={CustomScrollbarsVirtualList}
-  //     >
-  //       {({ data, index, style }) => {
-  //         return (
-  //           <div style={style}>
-  //             <PlaylistHistoryListItem song={data[index]} />
-  //           </div>
-  //         );
-  //       }}
-  //     </List>
-  //     {hasMore && (
-  //       <div className="flex justify-center mt-4">
-  //         <button
-  //           disabled={loading}
-  //           onClick={loadMore}
-  //           type="button"
-  //           className="rounded-md px-2 h-7 bg-zinc-500 text-zinc-100 font-semibold text-xs mr-0 hover:bg-zinc-700"
-  //         >
-  //           Starsze
-  //         </button>
-  //       </div>
-  //     )}
-  //   </>
-  // ) : (
-  //   <Placeholder />
-  // );
+  if (loading || error) return <Placeholder />;
+  if (data?.songsHistory.length === 0 || !data?.songsHistory)
+    return <Placeholder />;
 
-  return !!history.length ? (
-    <Scrollbars>
-      {history.map((song) => (
-        <PlaylistHistoryListItem song={song} key={song.id} />
-      ))}
-      {hasMore && (
-        <div className="flex justify-center mt-4">
-          <button
-            disabled={loading}
-            onClick={loadMore}
-            type="button"
-            className="rounded-md px-2 h-7 bg-zinc-500 text-zinc-100 font-semibold text-xs mr-0 hover:bg-zinc-700"
-          >
-            Starsze
-          </button>
-        </div>
-      )}
-    </Scrollbars>
-  ) : (
-    <Placeholder />
+  return (
+    <>
+      <List
+        itemData={data.songsHistory}
+        itemCount={data.songsHistory.length + 1}
+        itemSize={61}
+        height={3000}
+        width="100%"
+        outerElementType={CustomScrollbarsVirtualList}
+      >
+        {({ data: scollData, index, style }) => {
+          return (
+            <div style={style}>
+              {index === data.songsHistory.length ? (
+                <div className="flex justify-center mt-4">
+                  <button
+                    disabled={loading}
+                    onClick={loadMore}
+                    type="button"
+                    className="rounded-md px-2 h-7 bg-zinc-500 text-zinc-100 font-semibold text-xs mr-0 hover:bg-zinc-700"
+                  >
+                    Starsze
+                  </button>
+                </div>
+              ) : (
+                <PlaylistHistoryListItem song={scollData[index]} />
+              )}
+            </div>
+          );
+        }}
+      </List>
+    </>
   );
 }
 

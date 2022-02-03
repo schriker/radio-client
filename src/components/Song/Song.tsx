@@ -1,15 +1,13 @@
-import useStore from '../../store/store';
+import { SongFragmentFragment } from '../../generated/graphql';
 import Like from '../Like/Like';
 
-function Song() {
-  const song = useStore((state) => state.songs[0]);
-
+function Song({ song }: { song: SongFragmentFragment }) {
   return (
     <div className="flex items-center space-x-4 mb-8">
       <div
         className="flex-none rounded-lg bg-zinc-900 w-24 h-24 bg-cover positio bg-center"
         style={{
-          backgroundImage: `url(${song.thumbnail.thumbnails[2].url})`,
+          backgroundImage: `url(https://i.ytimg.com/vi/${song.videoId}/mq1.jpg)`,
         }}
       ></div>
       <div className="min-w-0 flex-auto space-y-1 font-semibold">

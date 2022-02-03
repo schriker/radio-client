@@ -1,26 +1,27 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useRef, useState } from 'react';
-import Scrollbars from 'react-custom-scrollbars';
-import { Song } from '../../types/apiSlice';
 import localforage from 'localforage';
 import Placeholder from '../Placeholder/Placeholder';
 import PlaylistHistoryListItem from '../PlaylistHistoryListItem/PlaylistHistoryListItem';
 import { SaveIcon } from '@heroicons/react/solid';
 import { UploadIcon } from '@heroicons/react/outline';
+import { SongFragmentFragment } from '../../generated/graphql';
+import { FixedSizeList as List } from 'react-window';
+import CustomScrollbarsVirtualList from '../CustomScrollbars/CustomScrollbars';
 
 function LikedList() {
-  const [likedList, setLikedList] = useState<Song[]>([]);
+  const [likedList, setLikedList] = useState<SongFragmentFragment[]>([]);
   const downloadRef = useRef<HTMLAnchorElement | null>(null);
 
   const fetchLikedList = async () => {
     try {
       const dbKeys = await localforage.keys();
-      const likedSongs: Song[] = [];
+      const likedSongs: SongFragmentFragment[] = [];
 
       for await (const key of dbKeys) {
         if (key.includes('liked')) {
-          const song = await localforage.getItem<Song>(key);
+          const song = await localforage.getItem<SongFragmentFragment>(key);
           if (song) likedSongs.push(song);
         }
       }
@@ -57,7 +58,7 @@ function LikedList() {
         if (fileEvent.target) {
           const importedSongs = JSON.parse(
             fileEvent.target.result as string
-          ) as Song[];
+          ) as SongFragmentFragment[];
           importedSongs.forEach((song) => {
             localforage.setItem(`liked:${song.id}`, song);
           });
@@ -73,7 +74,7 @@ function LikedList() {
 
   return (
     <>
-      <div className="flex mx-4 space-x-2 -mt-4 mb-2 justify-end">
+      <div className="flex mx-4 space-x-2 mb-2 justify-end absolute top-6 right-2 z-20">
         {!!likedList.length && (
           <button
             onClick={exportList}
@@ -97,13 +98,22 @@ function LikedList() {
         />
       </div>
       {!!likedList.length ? (
-        <>
-          <Scrollbars>
-            {likedList.map((song) => (
-              <PlaylistHistoryListItem song={song} key={song.id} />
-            ))}
-          </Scrollbars>
-        </>
+        <List
+          itemData={likedList}
+          itemCount={likedList.length}
+          itemSize={61}
+          height={3000}
+          width="100%"
+          outerElementType={CustomScrollbarsVirtualList}
+        >
+          {({ data, index, style }) => {
+            return (
+              <div style={style}>
+                <PlaylistHistoryListItem song={data[index]} />
+              </div>
+            );
+          }}
+        </List>
       ) : (
         <Placeholder />
       )}

@@ -1,6 +1,6 @@
-import { Song } from './apiSlice';
+import { SongFragmentFragment } from '../generated/graphql';
 
 export type LikePropsType = {
-  song: Song;
+  song: SongFragmentFragment;
   small?: boolean;
 };

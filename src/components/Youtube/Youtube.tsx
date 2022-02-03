@@ -3,19 +3,16 @@ import useStore from '../../store/store';
 import ReactPlayer from 'react-player';
 import { PlayerState } from '../../types/youtube';
 import { useEffect, useRef } from 'react';
+import { useSongsQuery } from '../../generated/graphql';
 
 function Youtube() {
-  const song = useStore((state) => state.songs[0]);
-  const removeSong = useStore((state) => state.removeSong);
+  const { data, refetch, updateQuery } = useSongsQuery();
+  const song = data?.songs[0]!;
   const setPlayerReady = useStore((state) => state.setPlayerReady);
   const togglePlayer = useStore((state) => state.togglePlayer);
   const isPlaying = useStore((state) => state.isPlaying);
   const setPlayerPosition = useStore((state) => state.setPlayerPosition);
   const muted = useStore((state) => state.muted);
-  const removeAllSubscriptions = useStore(
-    (state) => state.removeAllSubscriptions
-  );
-  const fetchSongs = useStore((state) => state.fetchSongs);
   const volume = useStore((state) => state.volume);
   const ref = useRef<ReactPlayer | null>(null);
 
@@ -23,8 +20,7 @@ function Youtube() {
     if (isPlaying) {
       const time = dayjs().diff(song.startTime, 'second');
       if (time > song.lengthSeconds) {
-        removeAllSubscriptions();
-        fetchSongs();
+        refetch();
       } else {
         ref.current?.seekTo(time);
       }
@@ -41,7 +37,11 @@ function Youtube() {
   };
 
   const onEnded = () => {
-    removeSong(song.id);
+    updateQuery((data) => {
+      return Object.assign({}, data, {
+        songs: data.songs.filter((cacheSong) => cacheSong.id !== song.id),
+      });
+    });
   };
 
   const onPause = () => {
@@ -56,7 +56,7 @@ function Youtube() {
     setPlayerPosition(state.playedSeconds);
   };
 
-  return (
+  return song ? (
     <div className="hidden">
       <ReactPlayer
         ref={ref}
@@ -70,7 +70,7 @@ function Youtube() {
         url={`https://www.youtube.com/watch?v=${song.videoId}`}
       />
     </div>
-  );
+  ) : null;
 }
 
 export default Youtube;

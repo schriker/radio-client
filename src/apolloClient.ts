@@ -1,45 +1,21 @@
 import {
-  ApolloLink,
-  Operation,
-  FetchResult,
-  Observable,
   HttpLink,
   split,
   ApolloClient,
   InMemoryCache,
 } from '@apollo/client/core';
 import { getMainDefinition } from '@apollo/client/utilities';
-import { print } from 'graphql';
-import { createClient, ClientOptions, Client } from 'graphql-ws';
-
-class WebSocketLink extends ApolloLink {
-  private client: Client;
-
-  constructor(options: ClientOptions) {
-    super();
-    this.client = createClient(options);
-  }
-
-  public request(operation: Operation): Observable<FetchResult> {
-    return new Observable((sink) => {
-      return this.client.subscribe<FetchResult>(
-        { ...operation, query: print(operation.query) },
-        {
-          next: sink.next.bind(sink),
-          complete: sink.complete.bind(sink),
-          error: sink.error.bind(sink),
-        }
-      );
-    });
-  }
-}
+import { WebSocketLink } from '@apollo/client/link/ws';
 
 const httpLink = new HttpLink({
   uri: process.env.REACT_APP_GRAPHQL_URL,
 });
 
 const wsLink = new WebSocketLink({
-  url: process.env.REACT_APP_GRAPHQL_WS!,
+  uri: process.env.REACT_APP_GRAPHQL_WS!,
+  options: {
+    reconnect: true,
+  },
 });
 
 const splitLink = split(
@@ -56,7 +32,39 @@ const splitLink = split(
 
 const client = new ApolloClient({
   link: splitLink,
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          songs: {
+            keyArgs: false,
+            merge(_, incoming) {
+              return incoming;
+            },
+          },
+          songsHistory: {
+            keyArgs: false,
+            merge(existing = [], incoming: any[], { args, readField }) {
+              if (!args?.endTime) {
+                const filtered = [
+                  ...incoming.filter((i) => {
+                    const duplicate = existing.some(
+                      (e: any) => readField('id', e) === readField('id', i)
+                    );
+                    return !duplicate;
+                  }),
+                  ...existing,
+                ];
+
+                return filtered;
+              }
+              return [...existing, ...incoming];
+            },
+          },
+        },
+      },
+    },
+  }),
 });
 
 export default client;

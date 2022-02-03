@@ -1,5 +1,5 @@
-import { Notification } from './apiSlice';
-
 export type NotificationsItemPropsType = {
-  notifification: Notification;
+  notifification: string;
+  id: string;
+  onClose: (id: string) => void;
 };

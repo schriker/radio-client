@@ -1,11 +1,11 @@
 import useStore from '../../store/store';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
+import { SongFragmentFragment } from '../../generated/graphql';
 
 dayjs.extend(duration);
 
-function Timeline() {
-  const song = useStore((state) => state.songs[0]);
+function Timeline({ song }: { song: SongFragmentFragment }) {
   const playerPosition = useStore((state) => state.playerPosition);
 
   return (

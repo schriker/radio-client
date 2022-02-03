@@ -58,13 +58,15 @@ function Sidebar({ title, children, isOpen, setIsOpen }: SidebarPropsType) {
                     </button>
                   </div>
                 </Transition.Child>
-                <div className="h-full flex flex-col py-6 bg-zinc-800 shadow-xl">
+                <div className="h-full flex flex-col py-6 bg-zinc-800 shadow-xl relative">
                   <div className="px-4 sm:px-6">
                     <Dialog.Title className="text-lg font-medium text-zinc-100">
                       {title}
                     </Dialog.Title>
                   </div>
-                  <div className="mt-6 relative flex-1">{children}</div>
+                  <div className="mt-6 overflow-hidden">
+                    <div className="flex flex-col h-full">{children}</div>
+                  </div>
                 </div>
               </div>
             </Transition.Child>
