@@ -29,7 +29,7 @@ function PlaylistHistoryListItem({ song }: { song: SongFragmentFragment }) {
                 {polishPlurals(
                   'odtworzenie',
                   'odtworzenia',
-                  'odtworzenia',
+                  'odtworzeń',
                   song.count
                 )}
               </span>
