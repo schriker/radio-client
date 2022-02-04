@@ -45,7 +45,7 @@ const client = new ApolloClient({
           songsHistory: {
             keyArgs: false,
             merge(existing = [], incoming: any[], { args, readField }) {
-              if (!args?.endTime) {
+              if (!args?.songHistoryInput?.endTime) {
                 const filtered = [
                   ...incoming.filter((i) => {
                     const duplicate = existing.some(

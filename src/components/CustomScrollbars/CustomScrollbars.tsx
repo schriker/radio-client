@@ -30,16 +30,17 @@ const CustomScrollbars = ({
         backgroundColor: '#27272a',
       }}
       onScroll={onScroll}
+      thumbMinSize={300}
     >
-      <div className="sticky top-0 h-9 z-20 font-semibold bg-zinc-900/90 backdrop-blur-sm text-zinc-300 text-xs flex items-center px-3">
+      <div className="sticky top-0 h-9 z-10 font-semibold bg-zinc-900/90 backdrop-blur-sm text-zinc-300 text-xs flex items-center px-3">
         <div className="flex-auto uppercase">Tytuł</div>
         <div className="flex space-x-3 items-center text-zinc-400 pr-2 uppercase">
           <p>Dodał</p>
           <p>&middot;</p>
-          <p className='w-8'>Czas</p>
+          <p className="w-8">Czas</p>
           <p>&middot;</p>
           <p>
-            <HeartIcon className='w-4' />
+            <HeartIcon className="w-4" />
           </p>
         </div>
       </div>

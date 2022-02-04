@@ -1,5 +1,5 @@
-query SongsHistory($endTime: String) {
-  songsHistory(endTime: $endTime) {
+query SongsHistory($songHistoryInput: SongHistoryInput) {
+  songsHistory(songHistoryInput: $songHistoryInput) {
     ...SongFragment
   }
 }
