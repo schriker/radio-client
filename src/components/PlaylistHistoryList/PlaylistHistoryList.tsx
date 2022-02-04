@@ -1,18 +1,34 @@
-// @ts-nocheck
-import { useSongsHistoryQuery } from '../../generated/graphql';
+import {
+  SongHistoryInput,
+  useSongsHistoryQuery,
+} from '../../generated/graphql';
 import Placeholder from '../Placeholder/Placeholder';
 import PlaylistHistoryListItem from '../PlaylistHistoryListItem/PlaylistHistoryListItem';
 import { FixedSizeList as List } from 'react-window';
 import CustomScrollbarsVirtualList from '../CustomScrollbars/CustomScrollbars';
+import useStore from '../../store/store';
+
 function PlaylistHistoryList() {
+  const searchValue = useStore((state) => state.searchValue);
   const { data, loading, error, fetchMore } = useSongsHistoryQuery({
     fetchPolicy: 'network-only',
   });
 
   const loadMore = () => {
+    let variables: SongHistoryInput = {
+      endTime: data?.songsHistory[data?.songsHistory.length - 1].endTime,
+    };
+
+    if (searchValue) {
+      variables = {
+        ...variables,
+        user: searchValue,
+      };
+    }
+
     fetchMore({
       variables: {
-        endTime: data?.songsHistory[data?.songsHistory.length - 1].endTime,
+        songHistoryInput: variables,
       },
     });
   };

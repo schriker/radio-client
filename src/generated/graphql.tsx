@@ -30,7 +30,7 @@ export type Query = {
 
 
 export type QuerySongsHistoryArgs = {
-  endTime?: InputMaybe<Scalars['String']>;
+  songHistoryInput?: InputMaybe<SongHistoryInput>;
 };
 
 export type Song = {
@@ -50,6 +50,11 @@ export type Song = {
   viewCount: Scalars['String'];
 };
 
+export type SongHistoryInput = {
+  endTime?: InputMaybe<Scalars['String']>;
+  user?: InputMaybe<Scalars['String']>;
+};
+
 export type Subscription = {
   __typename?: 'Subscription';
   newNotification: NewNotificationInput;
@@ -67,7 +72,7 @@ export type SongsQueryVariables = Exact<{ [key: string]: never; }>;
 export type SongsQuery = { __typename?: 'Query', songs: Array<{ __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: string, createdAt: any, count?: number | null }> };
 
 export type SongsHistoryQueryVariables = Exact<{
-  endTime?: InputMaybe<Scalars['String']>;
+  songHistoryInput?: InputMaybe<SongHistoryInput>;
 }>;
 
 
@@ -145,8 +150,8 @@ export type SongsQueryHookResult = ReturnType<typeof useSongsQuery>;
 export type SongsLazyQueryHookResult = ReturnType<typeof useSongsLazyQuery>;
 export type SongsQueryResult = Apollo.QueryResult<SongsQuery, SongsQueryVariables>;
 export const SongsHistoryDocument = gql`
-    query SongsHistory($endTime: String) {
-  songsHistory(endTime: $endTime) {
+    query SongsHistory($songHistoryInput: SongHistoryInput) {
+  songsHistory(songHistoryInput: $songHistoryInput) {
     ...SongFragment
   }
 }
@@ -164,7 +169,7 @@ export const SongsHistoryDocument = gql`
  * @example
  * const { data, loading, error } = useSongsHistoryQuery({
  *   variables: {
- *      endTime: // value for 'endTime'
+ *      songHistoryInput: // value for 'songHistoryInput'
  *   },
  * });
  */

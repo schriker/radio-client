@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import PlaylistHistoryIcon from '../Icons/PlaylistHistoryIcon';
 import PlaylistHistoryList from '../PlaylistHistoryList/PlaylistHistoryList';
+import PlaylistHistoryTitle from '../PlaylistHistoryTitle/PlaylistHistoryTitle';
 import Sidebar from '../Sidebar/Sidebar';
 
 function PlaylistHistory() {
@@ -9,7 +10,7 @@ function PlaylistHistory() {
   return (
     <>
       <Sidebar
-        title="Historia odtwarzania"
+        title={PlaylistHistoryTitle}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       >

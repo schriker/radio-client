@@ -29,6 +29,7 @@ const CustomScrollbarsPlayer = ({
         backgroundColor: '#27272a',
       }}
       onScroll={onScroll}
+      thumbMinSize={300}
     >
       <div className="sticky top-0 h-9 z-20 bg-zinc-900/90 backdrop-blur-sm text-zinc-300 text-xs flex items-center px-8 font-semibold">
         <div className="flex-auto uppercase">Tytuł</div>
