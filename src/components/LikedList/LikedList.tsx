@@ -108,7 +108,14 @@ function LikedList() {
         >
           {({ data, index, style }) => {
             return (
-              <div style={style}>
+              <div
+                style={{
+                  ...style,
+                  top: `${
+                    (style.top ? parseFloat(style.top as string) : 0) + 36
+                  }px`,
+                }}
+              >
                 <PlaylistHistoryListItem song={data[index]} />
               </div>
             );
