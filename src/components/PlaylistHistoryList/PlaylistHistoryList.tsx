@@ -60,16 +60,14 @@ function PlaylistHistoryList() {
             >
               {index === data.songsHistory.length ? (
                 <div className="flex justify-center mt-4">
-                  {data.songsHistory.length % 50 === 0 && (
-                    <button
-                      disabled={loading}
-                      onClick={loadMore}
-                      type="button"
-                      className="rounded-md px-2 h-7 bg-zinc-500 text-zinc-100 font-semibold text-xs mr-0 hover:bg-zinc-700 disabled:bg-zinc-700 disabled:text-zinc-800"
-                    >
-                      Starsze
-                    </button>
-                  )}
+                  <button
+                    disabled={loading}
+                    onClick={loadMore}
+                    type="button"
+                    className="rounded-md px-2 h-7 bg-zinc-500 text-zinc-100 font-semibold text-xs mr-0 hover:bg-zinc-700 disabled:bg-zinc-700 disabled:text-zinc-800"
+                  >
+                    Starsze
+                  </button>
                 </div>
               ) : (
                 <PlaylistHistoryListItem song={scollData[index]} />
