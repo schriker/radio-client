@@ -17,7 +17,7 @@ function PlaylistHistoryList() {
     });
   };
 
-  if (loading || error) return <Placeholder />;
+  if (error) return <Placeholder />;
   if (data?.songsHistory.length === 0 || !data?.songsHistory)
     return <Placeholder />;
 
