@@ -23,9 +23,9 @@ function PlaylistItem({ song }: { song: SongFragmentFragment }) {
               <span className="mx-2">&middot;</span>
               {song.count}{' '}
               {polishPlurals(
-                'odtworzenie',
-                'odtworzenia',
-                'odtworzenia',
+                 'odtworzenie',
+                 'odtworzenia',
+                 'odtworzeń',
                 song.count
               )}
             </span>
