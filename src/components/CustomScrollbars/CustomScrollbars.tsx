@@ -30,12 +30,7 @@ const CustomScrollbars = ({
         backgroundColor: '#27272a',
       }}
       onScroll={onScroll}
-      renderThumbVertical={({ style, props }) => (
-        <div style={{ ...style }} {...props} className="z-50" />
-      )}
-      renderTrackHorizontal={({ style, props }) => (
-        <div style={{ ...style }} {...props} className="z-50" />
-      )}
+      thumbMinSize={100}
     >
       <div className="sticky top-0 h-9 z-10 font-semibold bg-zinc-900/90 backdrop-blur-sm text-zinc-300 text-xs flex items-center px-3">
         <div className="flex-auto uppercase">Tytuł</div>
