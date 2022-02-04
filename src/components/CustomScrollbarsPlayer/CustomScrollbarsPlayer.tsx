@@ -30,11 +30,12 @@ const CustomScrollbarsPlayer = ({
       }}
       onScroll={onScroll}
     >
-      <div className="sticky top-0 h-9 z-20 bg-zinc-900/90 backdrop-blur-sm text-zinc-300 text-xs flex items-center px-8">
-        <div className="flex-auto">Tytuł</div>
-        <div className="flex space-x-7">
-          <div>Dodał</div>
-          <div>Czas</div>
+      <div className="sticky top-0 h-9 z-20 bg-zinc-900/90 backdrop-blur-sm text-zinc-300 text-xs flex items-center px-8 font-semibold">
+        <div className="flex-auto uppercase">Tytuł</div>
+        <div className="flex space-x-4 items-center text-zinc-400 uppercase">
+          <p>Dodał</p>
+          <p>&middot;</p>
+          <p>Czas</p>
         </div>
       </div>
       {children}
