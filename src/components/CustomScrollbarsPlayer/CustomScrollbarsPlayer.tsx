@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import React from 'react';
 import { CustomScrollbarsPropsType } from '../../types/scrollbars';
 
-const CustomScrollbars = ({
+const CustomScrollbarsPlayer = ({
   onScroll,
   forwardedRef,
   style,
@@ -35,7 +35,6 @@ const CustomScrollbars = ({
         <div className="flex space-x-7">
           <div>Dodał</div>
           <div>Czas</div>
-          <div>Lubię</div>
         </div>
       </div>
       {children}
@@ -46,6 +45,6 @@ const CustomScrollbars = ({
 const CustomScrollbarsVirtualList = React.forwardRef<
   unknown,
   CustomScrollbarsPropsType
->((props, ref) => <CustomScrollbars {...props} forwardedRef={ref} />);
+>((props, ref) => <CustomScrollbarsPlayer {...props} forwardedRef={ref} />);
 
 export default CustomScrollbarsVirtualList;

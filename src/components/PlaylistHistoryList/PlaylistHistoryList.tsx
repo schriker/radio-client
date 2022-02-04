@@ -33,7 +33,14 @@ function PlaylistHistoryList() {
       >
         {({ data: scollData, index, style }) => {
           return (
-            <div style={style}>
+            <div
+              style={{
+                ...style,
+                top: `${
+                  (style.top ? parseFloat(style.top as string) : 0) + 36
+                }px`,
+              }}
+            >
               {index === data.songsHistory.length ? (
                 <div className="flex justify-center mt-4">
                   <button

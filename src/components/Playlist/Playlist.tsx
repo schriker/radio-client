@@ -1,7 +1,7 @@
 import PlaylistItem from '../PlaylistItem/PlaylistItem';
 import { FixedSizeList as List } from 'react-window';
-import CustomScrollbarsVirtualList from '../CustomScrollbars/CustomScrollbars';
 import { SongFragmentFragment } from '../../generated/graphql';
+import CustomScrollbarsVirtualList from '../CustomScrollbarsPlayer/CustomScrollbarsPlayer';
 
 function Playlist({ songs }: { songs: SongFragmentFragment[] }) {
   return (
@@ -15,7 +15,14 @@ function Playlist({ songs }: { songs: SongFragmentFragment[] }) {
     >
       {({ data, index, style }) => {
         return (
-          <div style={style}>
+          <div
+            style={{
+              ...style,
+              top: `${
+                (style.top ? parseFloat(style.top as string) : 0) + 36
+              }px`,
+            }}
+          >
             <PlaylistItem song={data[index]} />
           </div>
         );
