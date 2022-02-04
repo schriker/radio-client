@@ -5,12 +5,12 @@ import Like from '../Like/Like';
 
 function PlaylistHistoryListItem({ song }: { song: SongFragmentFragment }) {
   return (
-    <div className="flex flex-auto items-center mx-3 px-3 py-3 space-x-3 border-b border-zinc-700 hover:bg-zinc-700 max-w-full">
+    <div className="flex flex-auto items-center border-b border-zinc-700 hover:bg-zinc-700 max-w-full pr-5">
       <a
         target="_blank"
         rel="noopener noreferrer"
         href={`https://www.youtube.com/watch?v=${song.videoId}`}
-        className="flex flex-auto items-center space-x-3 truncate"
+        className="flex flex-auto items-center space-x-3 truncate p-3"
       >
         <div
           className="flex-none rounded-lg bg-zinc-900 w-8 h-8 bg-cover bg-center"
