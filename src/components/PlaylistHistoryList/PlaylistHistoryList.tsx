@@ -11,7 +11,6 @@ import useStore from '../../store/store';
 function PlaylistHistoryList() {
   const searchValue = useStore((state) => state.searchValue);
   const { data, loading, error, fetchMore } = useSongsHistoryQuery({
-    fetchPolicy: 'network-only',
     notifyOnNetworkStatusChange: true,
   });
 
