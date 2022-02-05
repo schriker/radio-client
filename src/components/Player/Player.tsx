@@ -9,7 +9,6 @@ import Placeholder from '../Placeholder/Placeholder';
 import Playlist from '../Playlist/Playlist';
 import Song from '../Song/Song';
 import Timeline from '../Timeline/Timeline';
-import Youtube from '../Youtube/Youtube';
 
 function Player() {
   const { loading, data, error, refetch } = useSongsQuery();
@@ -46,7 +45,6 @@ function Player() {
         <Song song={currentSong} />
         <Timeline song={currentSong} />
       </div>
-      <Youtube />
       <Playlist songs={songs} />
     </>
   );

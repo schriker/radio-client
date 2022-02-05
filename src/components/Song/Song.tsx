@@ -1,6 +1,7 @@
 import { SongFragmentFragment } from '../../generated/graphql';
 import Like from '../Like/Like';
 import { polishPlurals } from 'polish-plurals';
+import Youtube from '../Youtube/Youtube';
 
 function Song({ song }: { song: SongFragmentFragment }) {
   return (
@@ -23,16 +24,17 @@ function Song({ song }: { song: SongFragmentFragment }) {
               <span className="mx-2">&middot;</span>
               {song.count}{' '}
               {polishPlurals(
-                 'odtworzenie',
-                 'odtworzenia',
-                 'odtworzeń',
+                'odtworzenie',
+                'odtworzenia',
+                'odtworzeń',
                 song.count!
               )}
             </span>
           )}
         </p>
       </div>
-      <div>
+      <div className="flex items-center space-x-2">
+        <Youtube />
         <Like song={song} />
       </div>
     </div>
