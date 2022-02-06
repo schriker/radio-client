@@ -40,7 +40,7 @@ function PlaylistHistoryListItem({ song }: { song: SongFragmentFragment }) {
           <p className="text-purple-400 text-xs">{song.user}</p>
           <p className="text-zinc-400 text-xs">&middot;</p>
           <p
-            className="text-zinc-400 text-xs"
+            className="text-zinc-400 text-xs w-8 text-right"
             title={dayjs(song.startTime).format('DD.MM.YYYY - HH:mm:ss')}
           >
             {dayjs.duration(song.lengthSeconds, 'seconds').format('mm:ss')}

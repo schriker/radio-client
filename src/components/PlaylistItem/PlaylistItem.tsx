@@ -23,9 +23,9 @@ function PlaylistItem({ song }: { song: SongFragmentFragment }) {
               <span className="mx-2">&middot;</span>
               {song.count}{' '}
               {polishPlurals(
-                 'odtworzenie',
-                 'odtworzenia',
-                 'odtworzeń',
+                'odtworzenie',
+                'odtworzenia',
+                'odtworzeń',
                 song.count
               )}
             </span>
@@ -34,9 +34,9 @@ function PlaylistItem({ song }: { song: SongFragmentFragment }) {
       </div>
       <div className="flex space-x-4 items-center">
         <p className="text-purple-400 text-xs">{song.user}</p>
-        <p className="text-zinc-400 text-xs hidden sm:block">&middot;</p>
+        <p className="text-zinc-400 text-xs">&middot;</p>
         <p
-          className="text-zinc-400 text-xs"
+          className="text-zinc-400 text-xs w-8 text-right"
           title={dayjs(song.startTime).format('DD.MM.YYYY - HH:mm:ss')}
         >
           {dayjs.duration(song.lengthSeconds, 'seconds').format('mm:ss')}

@@ -49,7 +49,7 @@ const CustomScrollbarsPlayer = ({
         <div className="flex space-x-4 items-center text-zinc-400 uppercase">
           <p>Dodał</p>
           <p>&middot;</p>
-          <p>Czas</p>
+          <p className="w-8">Czas</p>
         </div>
       </div>
       {children}
