@@ -21,12 +21,12 @@ function PlaylistItem({ song }: { song: SongFragmentFragment }) {
           {song.count && song.count > 1 && (
             <span className="text-zinc-400 text-xs">
               <span className="mx-2">&middot;</span>
-              {song.count}{' '}
+              {song.count - 1}{' '}
               {polishPlurals(
                 'odtworzenie',
                 'odtworzenia',
                 'odtworzeń',
-                song.count
+                song.count - 1
               )}
             </span>
           )}

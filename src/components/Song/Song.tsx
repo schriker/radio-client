@@ -21,14 +21,8 @@ function Song({ song }: { song: SongFragmentFragment }) {
           <span>{song.title}</span>
           {song.count && song.count > 1 && (
             <span className="text-zinc-400 text-xs">
-              <span className="mx-2">&middot;</span>
-              {song.count}{' '}
-              {polishPlurals(
-                'odtworzenie',
-                'odtworzenia',
-                'odtworzeń',
-                song.count!
-              )}
+              <span className="mx-2">&middot;</span>gramy {song.count}{' '}
+              {polishPlurals('raz', 'raz', 'raz', song.count!)}
             </span>
           )}
         </p>
