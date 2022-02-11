@@ -27,6 +27,14 @@ function Youtube() {
     setIsModalOpen(true);
   };
 
+  const nextSong = () => {
+    updateQuery((data) => {
+      return Object.assign({}, data, {
+        songs: data.songs.filter((cacheSong) => cacheSong.id !== song.id),
+      });
+    });
+  };
+
   useEffect(() => {
     if (isPlaying) {
       const time = dayjs().diff(song.startTime, 'second');
@@ -45,14 +53,13 @@ function Youtube() {
       ref.current?.seekTo(time);
     }
     setPlayerReady(true);
+    if (ref.current?.getInternalPlayer().playerInfo.duration === 0) {
+      nextSong();
+    }
   };
 
   const onEnded = () => {
-    updateQuery((data) => {
-      return Object.assign({}, data, {
-        songs: data.songs.filter((cacheSong) => cacheSong.id !== song.id),
-      });
-    });
+    nextSong();
   };
 
   const onPause = () => {
