@@ -8,6 +8,7 @@ import { VideoCameraIcon } from '@heroicons/react/solid';
 import Modal from '../Modal/Modal';
 
 function Youtube() {
+  const [isMuted, setIsMuted] = useState(true)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data, refetch, updateQuery } = useSongsQuery();
   const song = data?.songs[0]!;
@@ -37,6 +38,12 @@ function Youtube() {
 
   useEffect(() => {
     if (isPlaying) {
+      setIsMuted(false)
+    }
+  }, [isPlaying, setIsMuted])
+
+  useEffect(() => {
+    if (isPlaying) {
       const time = dayjs().diff(song.startTime, 'second');
       if (time > song.lengthSeconds) {
         refetch();
@@ -55,6 +62,13 @@ function Youtube() {
     setPlayerReady(true);
     if (ref.current?.getInternalPlayer().playerInfo.duration === 0) {
       nextSong();
+    }
+
+    const params = new URLSearchParams(window.location.search)
+    const [autoPlay] = params.getAll('autoPlay')
+
+    if (autoPlay) {
+      togglePlayer(true)
     }
   };
 
@@ -93,6 +107,7 @@ function Youtube() {
             ref={ref}
             width="100%"
             height="100%"
+            muted={isMuted}
             volume={muted ? 0 : volume}
             playing={isPlaying}
             onPause={onPause}
