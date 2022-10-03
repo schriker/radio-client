@@ -1,0 +1,5 @@
+subscription BotSongsSkipped {
+  botSongsSkipped {
+    ...SongFragment
+  }
+}

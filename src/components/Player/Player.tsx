@@ -1,6 +1,7 @@
 import {
   SongsDocument,
   SongsQuery,
+  useBotSongsSkippedSubscription,
   useSongAddedSubscription,
   useSongSkippedSubscription,
   useSongsQuery,
@@ -27,6 +28,14 @@ function Player() {
   });
 
   useSongSkippedSubscription({
+    onSubscriptionData: ({ subscriptionData }) => {
+      if (subscriptionData.data) {
+        refetch();
+      }
+    },
+  });
+
+  useBotSongsSkippedSubscription({
     onSubscriptionData: ({ subscriptionData }) => {
       if (subscriptionData.data) {
         refetch();

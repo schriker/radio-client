@@ -57,6 +57,7 @@ export type SongHistoryInput = {
 
 export type Subscription = {
   __typename?: 'Subscription';
+  botSongsSkipped: Array<Song>;
   newNotification: NewNotificationInput;
   songAdded: Song;
   songSkipped: Song;
@@ -77,6 +78,11 @@ export type SongsHistoryQueryVariables = Exact<{
 
 
 export type SongsHistoryQuery = { __typename?: 'Query', songsHistory: Array<{ __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: string, createdAt: any, count?: number | null }> };
+
+export type BotSongsSkippedSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type BotSongsSkippedSubscription = { __typename?: 'Subscription', botSongsSkipped: Array<{ __typename?: 'Song', author: string, channelId: string, endTime: any, id: number, lengthSeconds: number, startTime: any, title: string, user: string, userColor: string, videoId: string, viewCount: string, createdAt: any, count?: number | null }> };
 
 export type NewNotificationSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
@@ -184,6 +190,35 @@ export function useSongsHistoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type SongsHistoryQueryHookResult = ReturnType<typeof useSongsHistoryQuery>;
 export type SongsHistoryLazyQueryHookResult = ReturnType<typeof useSongsHistoryLazyQuery>;
 export type SongsHistoryQueryResult = Apollo.QueryResult<SongsHistoryQuery, SongsHistoryQueryVariables>;
+export const BotSongsSkippedDocument = gql`
+    subscription BotSongsSkipped {
+  botSongsSkipped {
+    ...SongFragment
+  }
+}
+    ${SongFragmentFragmentDoc}`;
+
+/**
+ * __useBotSongsSkippedSubscription__
+ *
+ * To run a query within a React component, call `useBotSongsSkippedSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useBotSongsSkippedSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBotSongsSkippedSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useBotSongsSkippedSubscription(baseOptions?: Apollo.SubscriptionHookOptions<BotSongsSkippedSubscription, BotSongsSkippedSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<BotSongsSkippedSubscription, BotSongsSkippedSubscriptionVariables>(BotSongsSkippedDocument, options);
+      }
+export type BotSongsSkippedSubscriptionHookResult = ReturnType<typeof useBotSongsSkippedSubscription>;
+export type BotSongsSkippedSubscriptionResult = Apollo.SubscriptionResult<BotSongsSkippedSubscription>;
 export const NewNotificationDocument = gql`
     subscription NewNotification {
   newNotification {
